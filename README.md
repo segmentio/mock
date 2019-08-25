@@ -10,7 +10,8 @@ This sidecar exposes most of the APIs as `api.segment.io`, plus the following en
 
 | HTTP Verb | Endpoint | Description |
 | --------- | -------- | ----------- |
-| GET       | /messages | Returns all received messages, and removes them from the internal log |
+| GET       | /health | Returns a 200 if the server is available. |
+| GET       | /messages | Returns all received messages, and removes them from the internal log. |
 
 > The above API is subject to change.
 
@@ -29,9 +30,12 @@ Alternatively, you can add this image to your `docker-compose.yml`:
 version: "3"
 services:
   snapshotter:
-    image: "segment/mock:v1"
+    image: "segment/mock:v0.0.2"
     healthcheck:
-      test: "curl --silent --show-error --fail localhost:8765/messages || exit 1"
+      test: "curl --silent --show-error --fail localhost:8765/health || exit 1"
+      interval: 1s
+      timeout: 1s
+      retries: 10
     ports:
       - "8765:8765"
 ```
@@ -104,6 +108,7 @@ This image is published to [DockerHub](https://cloud.docker.com/u/segment/reposi
 # First, bump the version in the Makefile, per semver.
 # Build the image:
 $ yarn build
-# Publish to DockerHub:
+# Open a PR and merge it to master.
+# Then, after checking out the master branch, run the following to publish to DockerHub:
 $ yarn release
 ```

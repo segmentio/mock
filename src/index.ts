@@ -18,6 +18,9 @@ app.use(errorhandler())
 app.use(cors())
 
 // Attach Express routes
+app.use('/health', (_, res) => {
+	res.sendStatus(200)
+})
 app.use('/', api)
 app.use((req, res) => {
 	console.log(`Unsupported request received: ${req.path}`)
