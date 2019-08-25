@@ -1,4 +1,4 @@
-VERSION = v0.0.1
+VERSION = v0.0.2
 
 run: build
 	@docker run -p 8765:8765 -it segment/mock:latest
