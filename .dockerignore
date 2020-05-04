@@ -1,2 +1,4 @@
 node_modules
 *.log
+#ignore git history to avoid commiting sensitive info
+.git
