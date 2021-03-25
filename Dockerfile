@@ -7,7 +7,7 @@ COPY . .
 # Rebuild any native bindings that were copied over from CircleCI
 RUN npm rebuild
 # Use a multi stage build so that the packages required for compiling native bindings aren't in the final image
-FROM node:10.18-alpine3.10
+FROM node:10.24-alpine3.10
 WORKDIR /app
 # Output Node version info so we know exactly what version was used
 RUN npm version
